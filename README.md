@@ -23,7 +23,7 @@ TensorBoard logging.
   `mDice`, `mPrecision`, `mRecall`, `mFscore`, plus per-class background/foreground);
   inference modes `resize` (keep-ratio, official-style) / `full` (native resolution) /
   `slide` (sliding window), with optional multi-scale TTA.
-- **Inference**: single image or folder â†?original-resolution binary `0/255` PNG.
+- **Inference**: single image or folder ï¿½?original-resolution binary `0/255` PNG.
 - **Logging**: timestamped text log, JSONL scalars/metrics, run manifest and full
   TensorBoard integration (scalars + validation prediction images).
 
@@ -56,6 +56,39 @@ pip install -e .                         # core package; extras: pip install -e 
 holds the shared non-PyTorch dependencies; `pyproject.toml` declares the package and optional
 extras (`train`, `sam`, `export`, `tflite`, `dev`, `all`). The setup scripts set
 `PYTHONNOUSERSITE=1` so a stale `~/.local` package cannot shadow the environment.
+
+### Activate the environment
+
+The setup scripts create a conda environment at `<repo>/.venv-efficientvit`. Activate it before
+running any script.
+
+Windows (PowerShell / cmd):
+```powershell
+conda activate .\.venv-efficientvit
+# or by absolute path:
+conda activate F:\path\to\efficientvit\.venv-efficientvit
+```
+
+Linux / WSL2 / macOS:
+```bash
+conda activate ./.venv-efficientvit
+# or by absolute path:
+conda activate /data/yinwu/efficientvit/.venv-efficientvit
+```
+
+If `conda activate` does not accept the relative path, register the prefix once and then activate
+by name:
+```bash
+conda config --append envs_dirs <repo>
+conda activate .venv-efficientvit
+```
+
+Alternatively use the interpreter directly without activating:
+```bash
+.venv-efficientvit/bin/python -s train_seg_model.py --config configs/seg/crack_b0.json          # Linux/WSL2/macOS
+.venv-efficientvit\Scripts\python.exe -s train_seg_model.py --config configs/seg/crack_b0.json # Windows
+```
+`-s` (equivalently `PYTHONNOUSERSITE=1`) keeps a stale user-site package from shadowing the env.
 
 ## Dataset
 
