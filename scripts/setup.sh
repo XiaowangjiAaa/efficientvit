@@ -11,6 +11,12 @@
 #   bash scripts/setup.sh --print-only          # show commands, execute nothing
 set -euo pipefail
 
+# Keep the environment self-contained: ignore ~/.local user site-packages so a
+# stale/partial user-site torch cannot shadow (or receive) the project packages.
+export PYTHONNOUSERSITE=1
+export PIP_USER=0
+export PIP_DISABLE_PIP_VERSION_CHECK=1
+
 ENV_PATH=""
 CPU=0
 EXTRAS=""

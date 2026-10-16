@@ -6,6 +6,10 @@ param(
     [switch]$PrintOnly
 )
 $ErrorActionPreference = 'Stop'
+# Keep the environment self-contained: ignore user site-packages so a stale
+# ~/.local / %APPDATA% torch cannot shadow (or receive) the project packages.
+$env:PYTHONNOUSERSITE = '1'
+$env:PIP_USER = '0'
 $Project = Split-Path -Parent $PSScriptRoot
 if (-not $EnvPath) { $EnvPath = Join-Path $Project '.venv-efficientvit' }
 $EnvPath = [System.IO.Path]::GetFullPath($EnvPath)
