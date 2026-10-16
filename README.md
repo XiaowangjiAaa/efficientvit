@@ -23,7 +23,7 @@ TensorBoard logging.
   `mDice`, `mPrecision`, `mRecall`, `mFscore`, plus per-class background/foreground);
   inference modes `resize` (keep-ratio, official-style) / `full` (native resolution) /
   `slide` (sliding window), with optional multi-scale TTA.
-- **Inference**: single image or folder â†’ original-resolution binary `0/255` PNG.
+- **Inference**: single image or folder â†?original-resolution binary `0/255` PNG.
 - **Logging**: timestamped text log, JSONL scalars/metrics, run manifest and full
   TensorBoard integration (scalars + validation prediction images).
 
@@ -87,7 +87,7 @@ python train_seg_model.py --config configs/seg/crack_b0.json
 python train_seg_model.py --config configs/seg/crack_b2.json --max_iters 40000 --eval_mode slide
 ```
 
-Defaults in the provided configs: `max_iters=30000`, `batch_size=16`, `val_interval=265`,
+Defaults in the provided configs: `max_iters=30000`, `batch_size=12`, `val_interval=265`,
 `checkpoint_interval=265`, `save_on_val=true`, early stopping when mIoU does not improve for
 `patience_iters=5000`.
 
@@ -95,7 +95,7 @@ Config schema (see `configs/seg/crack_b0.json`):
 ```json
 {
   "data_root": "dataset", "split_dir": "splits",
-  "model": "b0", "num_classes": 2, "crop_size": 512, "batch_size": 16, "workers": 0,
+  "model": "b0", "num_classes": 2, "crop_size": 512, "batch_size": 12, "workers": 0,
   "max_iters": 30000, "lr": 0.0004, "weight_decay": 0.01, "ce_weight": 1.0, "dice_weight": 1.0,
   "amp": true,
   "augmentation": { "mode": "random_crop", "resize_scale": [2048, 512], "ratio_range": [0.5, 2.0],
