@@ -1,0 +1,15 @@
+*.DS_Store*
+.vscode
+.idea/
+__pycache__/
+assets/checkpoints/
+.dev/
+.exp/
+.venv*/
+work_dirs/
+predictions/
+*.egg-info/
+build/
+dist/
+# datasets / large local artifacts (keep out of git; regenerate with prepare_seg_dataset.py)
+dataset/

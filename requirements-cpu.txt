@@ -1,0 +1,7 @@
+# CPU-only install (slower; no NVIDIA driver required).
+#   python -m pip install -r requirements-cpu.txt
+#   python -m pip install -e .
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.0.1+cpu
+torchvision==0.15.2+cpu
+-r requirements-common.txt

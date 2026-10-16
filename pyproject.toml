@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "efficientvit"
+version = "0.1.0"
+description = "EfficientViT: multi-scale linear attention for high-resolution dense prediction (classification / SAM / crack segmentation workflow)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Han Cai, Junyan Li, Muyan Hu, Chuang Gan, Song Han" }]
+keywords = ["efficientvit", "semantic-segmentation", "crack", "linear-attention"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Core runtime dependencies (no PyTorch here on purpose: torch/torchvision are
+# installed from the CUDA/CPU index by requirements*.txt so the correct wheel is used).
+dependencies = [
+    "numpy<2",
+    "Pillow",
+    "einops",
+    "opencv-python<4.11",
+    "timm==0.6.13",
+    "tqdm",
+    "torchprofile",
+    "matplotlib",
+    "transformers",
+    "tensorboard",
+]
+
+[project.optional-dependencies]
+# Distributed launcher used by train_cls_model.py
+train = ["torchpack @ git+https://github.com/zhijian-liu/torchpack.git@3a5a9f7ac665444e1eb45942ee3f8fc7ffbd84e5"]
+# Segment Anything (EfficientViT-SAM demo/eval)
+sam = ["segment-anything @ git+https://github.com/facebookresearch/segment-anything.git"]
+# ONNX export / runtime
+export = ["onnx", "onnxsim", "onnxruntime"]
+# TFLite export (requires TinyNeuralNetwork)
+tflite = ["TinyNeuralNetwork @ git+https://github.com/alibaba/TinyNeuralNetwork.git"]
+dev = ["black", "isort"]
+all = [
+    "torchpack @ git+https://github.com/zhijian-liu/torchpack.git@3a5a9f7ac665444e1eb45942ee3f8fc7ffbd84e5",
+    "segment-anything @ git+https://github.com/facebookresearch/segment-anything.git",
+    "onnx",
+    "onnxsim",
+    "onnxruntime",
+    "TinyNeuralNetwork @ git+https://github.com/alibaba/TinyNeuralNetwork.git",
+    "black",
+    "isort",
+]
+
+[tool.setuptools.packages.find]
+include = ["efficientvit*"]
+exclude = ["assets*", "configs*", "onnx_exporter*", "work_dirs*", ".exp*"]
+
+# ---------------------------------------------------------------------------
+# Formatting tools (unchanged)
+# ---------------------------------------------------------------------------
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+extend-exclude = ".vscode/.*"
+
+[tool.isort]
+profile = "black"
+extend_skip = [".vscode"]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120

@@ -1,0 +1,59 @@
+{
+  "data_root": "dataset",
+  "split_dir": "splits",
+  "model": "l1",
+  "num_classes": 2,
+  "crop_size": 512,
+  "batch_size": 16,
+  "workers": 0,
+  "max_iters": 30000,
+  "lr": 0.0004,
+  "weight_decay": 0.01,
+  "ce_weight": 1.0,
+  "dice_weight": 1.0,
+  "grad_clip": 1.0,
+  "amp": true,
+  "backbone_init": null,
+  "augmentation": {
+    "mode": "random_crop",
+    "resize_scale": [2048, 512],
+    "ratio_range": [0.5, 2.0],
+    "cat_max_ratio": 0.75,
+    "horizontal_flip_prob": 0.5,
+    "vertical_flip_prob": 0.0,
+    "photometric_distortion": true,
+    "rotate_prob": 0.0,
+    "rotate_degree": 10.0
+  },
+  "scheduler": {
+    "type": "poly",
+    "power": 1.0,
+    "warmup_iters": 1500,
+    "warmup_ratio": 0.000001,
+    "min_lr": 0.0
+  },
+  "eval": {
+    "mode": "resize",
+    "val_scale": [2048, 512],
+    "window_size": 512,
+    "window_overlap": 0.25,
+    "scales": null
+  },
+  "val_interval": 265,
+  "checkpoint_interval": 265,
+  "save_on_val": true,
+  "early_stopping": {
+    "patience_iters": 5000,
+    "min_delta": 0.0
+  },
+  "metrics": ["mIoU", "mDice", "mFscore", "Precision", "Recall", "F1-score"],
+  "seed": 42,
+  "gpus": "0",
+  "work_dir": "work_dirs/seg/crack_l1",
+  "test": true,
+  "logging": {
+    "interval": 20,
+    "window_size": 20,
+    "tensorboard": true
+  }
+}

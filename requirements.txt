@@ -1,0 +1,10 @@
+# CUDA 11.8 install: single GPU on Windows, native CUDA DDP on Linux/WSL2.
+# One-command environment setup from a Conda PowerShell prompt:
+#   powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+# Or, inside an existing Python 3.10 environment:
+#   python -m pip install -r requirements.txt
+#   python -m pip install -e .
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.0.1+cu118
+torchvision==0.15.2+cu118
+-r requirements-common.txt
